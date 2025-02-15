@@ -23,6 +23,10 @@ public class ProductServiceImpl implements IProductService {
     @Override
     public ResponseEntity<?> create(ProductEntity product) {
 
+        if (productRepository.existsByName(product.getName())) {
+            return new ResponseEntity<>("El nombre del producto ya existe.", HttpStatus.CONFLICT);
+        }
+
         ProductEntity newProduct = this.productRepository.save(product);
         return ResponseEntity.ok(newProduct);
     }

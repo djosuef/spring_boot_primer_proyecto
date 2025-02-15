@@ -1,20 +1,27 @@
 package com.aulamatriz.product.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
+
 
 @Entity
 @Table(name = "product")
 public class ProductEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private int id;
+
+    @NotBlank(message = "El nombre es obligatorio")
+    //@UniqueField
     private String name;
 
     private String description;
 
+    @Positive(message = "El stock debe ser positivo")
     private int stock;
 
+    @Positive(message = "El precio debe ser positivo")
     private double price;
 
     public ProductEntity() {
