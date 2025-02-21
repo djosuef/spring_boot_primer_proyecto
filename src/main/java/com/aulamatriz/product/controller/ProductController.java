@@ -2,6 +2,7 @@ package com.aulamatriz.product.controller;
 
 import com.aulamatriz.product.entities.ProductEntity;
 import com.aulamatriz.product.service.IProductService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +17,7 @@ public class ProductController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<?> create(@RequestBody ProductEntity product){
+    public ResponseEntity<?> create(@Valid @RequestBody ProductEntity product){
 
         return ResponseEntity.ok(this.iProductService.create(product));
     }
@@ -36,7 +37,7 @@ public class ProductController {
         return this.iProductService.delete(id);
     }
 
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public ResponseEntity<?> updateById(@PathVariable int id,
                                         @RequestBody ProductEntity productEntity){
         return this.iProductService.update(id,productEntity);
